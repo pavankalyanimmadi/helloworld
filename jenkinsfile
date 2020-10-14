@@ -9,7 +9,7 @@ pipeline {
     
         stage('Build') {
             steps {
-               bat "mvn clean install"
+               bat "mvn clean package"
             }
         }
         stage('Test') {
@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                deploy adapters: [tomcat8(credentialsId: 'deb6a03a-af91-4005-a063-4680c5b1a904', path: '', url: 'http://localhost:8081/')], contextPath: 'hey', war: '**/*.war'
             }
         }
     }
