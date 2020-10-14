@@ -5,6 +5,12 @@ pipeline {
     }
 
     stages {
+        stage('code checkout'){
+            steps{
+                git credentialsId: '7051b5f2-b6a5-4d5e-b67e-bc5775ade943', url: 'https://github.com/pavankalyanimmadi/helloworld.git'
+            }
+        }
+    
         stage('Build') {
             steps {
                sh "mvn clean install"
