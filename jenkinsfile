@@ -5,6 +5,24 @@ pipeline {
     }
 
     stages {
+    
+        stage('sonar code quality check'){
+            steps{
+                script{
+                    withSonarQube('sonar server'){
+                        bat "mvn sonar:sonar"
+                        }
+                    timeout(time:1 unit: 'HOURS'){
+                        def qg=waitForQualityGate()
+                        if(qg.status!='ok'){
+                            error "pipeline aborted due to quality gate failure: ${qg.status} "
+                            
+                        }
+                        
+                 }
+               }
+         }
+                        
         
     
         stage('Build') {
