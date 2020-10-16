@@ -6,7 +6,7 @@ pipeline {
 
     stages {
     
-        stage('sonar code quality check'){
+        stage('sonar code quality check '){
             steps{
                 script{
                     withSonarQubeEnv('sonar server'){
